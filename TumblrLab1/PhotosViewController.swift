@@ -126,7 +126,14 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // set the avatar
         
-        profileView.setImageWith(NSURL(string:"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar")! as URL)
+        
+        let post = self.posts[section]
+        let photos = post.value(forKeyPath: "photos") as! [NSDictionary]
+        let imageURL = photos[0].value(forKeyPath: "original_size.url") as! String
+       
+        
+        
+        profileView.setImageWith(NSURL(string: imageURL)! as URL)
         headerView.addSubview(profileView)
         
         // Add a UILabel for the date here
