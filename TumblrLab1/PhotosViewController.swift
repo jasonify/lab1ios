@@ -90,11 +90,11 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotoCellTableViewCell
         
         
-        cell.titleLabel.text = "bloop \(indexPath.row)"
+        cell.titleLabel.text = "bloop \(indexPath.section)"
         
         
         // TODO: figure out how to index into array with forKeyPath
-        let post = self.posts[indexPath.row]
+        let post = self.posts[indexPath.section]
         let photos = post.value(forKeyPath: "photos") as! [NSDictionary]
         let imageURL = photos[0].value(forKeyPath: "original_size.url") as! String
         
@@ -125,6 +125,7 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         profileView.layer.borderWidth = 1;
         
         // set the avatar
+        
         profileView.setImageWith(NSURL(string:"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar")! as URL)
         headerView.addSubview(profileView)
         
