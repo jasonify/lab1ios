@@ -127,18 +127,21 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // set the avatar
         
         
-        let post = self.posts[section]
-        let photos = post.value(forKeyPath: "photos") as! [NSDictionary]
-        let imageURL = photos[0].value(forKeyPath: "original_size.url") as! String
-       
+        profileView.setImageWith(NSURL(string:"https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar")! as URL)
         
         
-        profileView.setImageWith(NSURL(string: imageURL)! as URL)
+        let label = UILabel(frame: CGRect(x: 50, y: 10, width: 300, height: 30))
+        //label.center = CGPointMake(160, 284)
+        //label.textAlignment = NSTextAlignment.Center
+        label.text = "I'am a test label"
+        headerView.addSubview(label)
+        
+        
         headerView.addSubview(profileView)
         
         // Add a UILabel for the date here
         // Use the section number to get the right URL
-        let label = "Sdfdsfds"
+        
         return headerView
     }
     
@@ -164,9 +167,9 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Pass the selected object to the new view controller.
         let vc = segue.destination as! PhotoDetailsViewController
         var indexPath = self.tableView.indexPath(for: sender as! UITableViewCell)
-        vc.titleLabel = "\(indexPath?.row)"
+        vc.titleLabel = "\(indexPath?.section)"
         // TODO: figure out how to index into array with forKeyPath
-        let post = self.posts[(indexPath?.row)!]
+        let post = self.posts[(indexPath?.section)!]
         let photos = post.value(forKeyPath: "photos") as! [NSDictionary]
         let imageURL = photos[0].value(forKeyPath: "original_size.url") as! String
         
